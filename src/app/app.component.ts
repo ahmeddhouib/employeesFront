@@ -8,9 +8,9 @@ import {ApicallService} from "./apicall.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'testdatahorizon';
 
   pageEmployees: any;
+  pageNumber : number = 1;
 
   constructor(private apiService: ApicallService) {
   }
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     this.getEmployeeList();
   }
 
-  getEmployeeList() {
+    getEmployeeList() {
     this.apiService.getEmployes()
       .subscribe(data => { this.pageEmployees = data.data;
                                   console.log(data);
