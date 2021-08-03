@@ -26,14 +26,17 @@
 
   <thead>
     <tr>
-      <th class="th-sm">Name</th>
-      <th class="th-sm">Salary</th>
-      <th class="th-sm">Age</th>
+      <th class="th-sm" [class.active]="order === 'employee_name'"  (click)="setOrder('employee_name')" ><span [hidden]="reverse">▼</span>
+      <span [hidden]="!reverse">▲</span>Name</th>
+      <th class="th-sm" [class.active]="order === 'employee_salary'"  (click)="setOrder('employee_salary')"><span [hidden]="reverse">▼</span>
+      <span [hidden]="!reverse">▲</span>Salary</th>
+      <th class="th-sm" [class.active]="order === 'employee_age'"  (click)="setOrder('employee_age')"><span [hidden]="reverse">▼</span>
+      <span [hidden]="!reverse">▲</span>Age</th>
     </tr>
   </thead>
 
   <tbody>
-    <tr *ngFor="let emp of pageEmployees | filter:searchText | paginate: {itemsPerPage: 10, currentPage: pageNumber}">
+    <tr *ngFor="let emp of pageEmployees | filter:searchText | paginate: {itemsPerPage: 10, currentPage: pageNumber}  | orderBy: order:reverse:'case-insensitive' ">
       <td>{{emp.employee_name}}</td>
       <td>{{emp.employee_salary}}</td>
       <td>{{emp.employee_age}}</td>
