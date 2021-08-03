@@ -4,15 +4,21 @@
     Welcome to Employee
   </h1>
 </div>
-<!--<form>-->
-  <!--<input placeholder="Enter Employee Name" [(ngModel)]="empPost.name"/>-->
-  <!--<br/>-->
-  <!--<input placeholder="Enter Employee Salary"[(ngModel)]="empPost.salary">-->
-  <!--<br/>-->
-  <!--<input placeholder="Enter Employee Age" [(ngModel)]="empPost.age"/>-->
-  <!--<br/>-->
-  <!--<button type="submit" (click)="createEmployeeData()">Save</button>-->
-<!--</form>-->
+<div class="form-group">
+  <form >
+    <div class="form-group">
+
+    <input  class="form-control form-control-sm " type="text"  placeholder="Enter Employee Name" [(ngModel)]="newEmployee.name" name="name"/>
+    <br/>
+    <input class="form-control form-control-sm" type="number" placeholder="Enter Employee Salary" [(ngModel)]="newEmployee.salary" name="salary"/>
+    <br/>
+    <input class="form-control form-control-sm" type="number" placeholder="Enter Employee Age" [(ngModel)]="newEmployee.age"  name="age"/>
+    <br/>
+      <button class=" btn btn-primary" type="submit" (click)="createEmployeeData()">Save</button>
+    </div>
+
+  </form>
+</div>
 
 
 

@@ -15,6 +15,9 @@ export class AppComponent implements OnInit {
   order : string = 'employee_name';
   reverse: boolean = false;
   sortedCollection: any[];
+  NewEmp  = {id: null, employee_name: "", employee_salary: null,employee_age: null};
+  NombreEmployee : number = 0;
+  newEmployee = {name: "", salary: null,age: null};
 
   constructor(private apiService: ApicallService,private orderPipe: OrderPipe) {
     this.getEmployeeList();
@@ -37,6 +40,7 @@ export class AppComponent implements OnInit {
     getEmployeeList() {
     this.apiService.getEmployes()
       .subscribe(data => { this.pageEmployees = data.data;
+                                this.NombreEmployee = data.data.length;
                                   console.log(data);
       }, err => {console.log(err); } );
   }
@@ -51,6 +55,21 @@ export class AppComponent implements OnInit {
         this.sortedCollection = this.pageEmployees.splice(i,1);
       }
     }
+  }
+
+  createEmployeeData(){
+    this.NewEmp.id =  this.NombreEmployee + 1;
+    this.NewEmp.employee_name =  this.newEmployee.name ;
+    this.NewEmp.employee_salary =  this.newEmployee.salary ;
+    this.NewEmp.employee_age =  this.newEmployee.age;
+
+    this.pageEmployees.push(this.NewEmp);
+    this.sortedCollection = this.orderPipe.transform(this.pageEmployees, this.order);
+     console.log(this.sortedCollection);
+    this.newEmployee.name = "";
+    this.newEmployee.salary = null;
+    this.newEmployee.age = null;
+
   }
 
 
