@@ -10,13 +10,14 @@ import {OrderPipe} from "ngx-order-pipe";
 })
 export class AppComponent implements OnInit {
 
-  pageEmployees: any;
+  pageEmployees: any[];
   pageNumber : number = 1;
   order : string = 'employee_name';
   reverse: boolean = false;
   sortedCollection: any[];
 
   constructor(private apiService: ApicallService,private orderPipe: OrderPipe) {
+    this.getEmployeeList();
     this.sortedCollection = orderPipe.transform(this.pageEmployees, 'employee_name');
     console.log(this.sortedCollection);
   }
@@ -40,6 +41,17 @@ export class AppComponent implements OnInit {
       }, err => {console.log(err); } );
   }
 
+  deleteEmployeeData(id:number) {
+    this.sortedCollection = this.orderPipe.transform(this.pageEmployees, this.order);
+    for(let i = 0; i < this.pageEmployees.length; i++){
+      if(id == this.pageEmployees[i].id){
+        // console.log(id);
+        // console.log(i);
+        // console.log(this.pageEmployees.length);
+        this.sortedCollection = this.pageEmployees.splice(i,1);
+      }
+    }
+  }
 
 
 }

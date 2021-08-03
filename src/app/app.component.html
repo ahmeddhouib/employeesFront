@@ -20,7 +20,7 @@
 
 
 <div class="row">
-    <input type="text" placeholder="Search" [(ngModel)]="searchText"/>
+    <input type="text" placeholder="          Search" [(ngModel)]="searchText"/>
 </div>
 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
 
@@ -36,10 +36,13 @@
   </thead>
 
   <tbody>
-    <tr *ngFor="let emp of pageEmployees | filter:searchText | paginate: {itemsPerPage: 10, currentPage: pageNumber}  | orderBy: order:reverse:'case-insensitive' ">
+    <tr *ngFor="let emp of pageEmployees | filter:searchText |  paginate: {itemsPerPage: 10, currentPage: pageNumber}  | orderBy: order:reverse:'case-insensitive' ;let index=index " id="{{emp.id}}">
       <td>{{emp.employee_name}}</td>
       <td>{{emp.employee_salary}}</td>
       <td>{{emp.employee_age}}</td>
+      <td >
+        <button (click)="deleteEmployeeData(emp.id)" type="button" class="btn btn-danger btn-sm">Delete</button>
+      </td>
     </tr>
   </tbody>
 
