@@ -40,21 +40,22 @@ export class AppComponent implements OnInit {
 
     getEmployeeList() {
     this.apiService.getEmployes()
-      .subscribe((data : Employee[] ) => { this.pageEmployees = data;
+      .subscribe((data : any ) => {
+        this.pageEmployees = data.data;
 
-                                this.NombreEmployee = data.length;
+                                this.NombreEmployee = data.data.length;
                                   console.log(data);
       }, err => {console.log(err); } );
   }
 
   deleteEmployeeData(id:number) {
     this.sortedCollection = this.orderPipe.transform(this.pageEmployees, this.order);
-    for(let i = 0; i < this.pageEmployees.length; i++){
-      if(id == this.pageEmployees[i].id){
+    for (let i = 0; i < this.pageEmployees.length; i++) {
+      if (id == this.pageEmployees[i].id) {
         // console.log(id);
         // console.log(i);
         // console.log(this.pageEmployees.length);
-        this.sortedCollection = this.pageEmployees.splice(i,1);
+        this.sortedCollection = this.pageEmployees.splice(i,1 );
       }
     }
   }
