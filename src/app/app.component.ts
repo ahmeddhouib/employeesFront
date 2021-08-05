@@ -10,14 +10,15 @@ import {OrderPipe} from "ngx-order-pipe";
 })
 export class AppComponent implements OnInit {
 
-  pageEmployees: any[];
+  // pageEmployees: any[];
+  pageEmployees: Employee[] = [];
   pageNumber : number = 1;
   order : string = 'employee_name';
   reverse: boolean = false;
   sortedCollection: any[];
-  NewEmp  = {id: null, employee_name: "", employee_salary: null,employee_age: null};
+  NewEmp  = {id: null, employee_name: "", employee_salary: null,employee_age: null, employee_image: ""};
   NombreEmployee : number = 0;
-  newEmployee = {name: "", salary: null,age: null};
+  newEmployee = {name: "", salary: null,age: null, image: ""};
 
   constructor(private apiService: ApicallService,private orderPipe: OrderPipe) {
     this.getEmployeeList();
@@ -39,8 +40,9 @@ export class AppComponent implements OnInit {
 
     getEmployeeList() {
     this.apiService.getEmployes()
-      .subscribe(data => { this.pageEmployees = data.data;
-                                this.NombreEmployee = data.data.length;
+      .subscribe((data : Employee[] ) => { this.pageEmployees = data;
+
+                                this.NombreEmployee = data.length;
                                   console.log(data);
       }, err => {console.log(err); } );
   }
@@ -62,6 +64,7 @@ export class AppComponent implements OnInit {
     this.NewEmp.employee_name =  this.newEmployee.name ;
     this.NewEmp.employee_salary =  this.newEmployee.salary ;
     this.NewEmp.employee_age =  this.newEmployee.age;
+    this.NewEmp.employee_image =  this.newEmployee.image;
 
     this.pageEmployees.push(this.NewEmp);
     this.sortedCollection = this.orderPipe.transform(this.pageEmployees, this.order);
@@ -69,6 +72,7 @@ export class AppComponent implements OnInit {
     this.newEmployee.name = "";
     this.newEmployee.salary = null;
     this.newEmployee.age = null;
+    this.newEmployee.image =  null;
 
   }
 

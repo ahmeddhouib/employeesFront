@@ -42,7 +42,7 @@
   </thead>
 
   <tbody>
-    <tr *ngFor="let emp of pageEmployees | filter:searchText |  paginate: {itemsPerPage: 10, currentPage: pageNumber}  | orderBy: order:reverse:'case-insensitive' ;let index=index " id="{{emp.id}}">
+    <tr *ngFor="let emp of pageEmployees.data | filter:searchText |  paginate: {itemsPerPage: 10, currentPage: pageNumber}  | orderBy: order:reverse:'case-insensitive' ;let index=index" id="{{emp.id}}">
       <td>{{emp.employee_name}}</td>
       <td>{{emp.employee_salary}}</td>
       <td>{{emp.employee_age}}</td>
